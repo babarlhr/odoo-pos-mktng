@@ -1,0 +1,218 @@
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/*     HEADER      */
+
+.oe-mktng-header {
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+}
+
+.oe-mktng-demo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.oe-mktng-demo-overlay {
+    position: relative;
+    overflow: hidden;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+}
+
+.oe-mktng-demo-toolbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 24px 16px;
+    color: rgba(0,0,0,0.2);
+    font-size: 20px;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+}
+.oe-mktng-demo-toolbar .label-fullscreen,
+.oe-mktng-demo-toolbar .label-close
+{
+    color: rgba(0,0,0,0.5);
+    cursor: pointer;
+    padding: 16px;
+    transition: all 150ms linear;
+}
+.oe-mktng-demo-toolbar .label-fullscreen:hover,
+.oe-mktng-demo-toolbar .label-close:hover
+{
+    color: white;
+}
+
+/*     FULLSCREEN */
+
+.oe-mktng-demo-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    display: none;
+    background: black;
+    z-index: 10000;
+}
+
+.oe-mktng-demo-fullscreen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    background: black;
+    pointer-events: none;
+}
+.oe-mktng-demo-exit-fullscreen {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 48px;
+    width: 64px;
+    cursor: pointer;
+}
+
+/*     IPAD        */
+.oe-ipad-screen {
+    width: 1024px;
+    height: 768px;
+    position: relative;
+    left: -272px;
+    top: -200px;
+    transform: scale(0.472);
+}
+
+.oe-ipad-iframe {
+    border: none;
+    background: black;
+}
+.oe-ipad-screen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 1;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/*     NAVBAR      */
+.oe-mktng-navbar {
+    border-bottom: solid 1px rgba(162, 70, 137, 0.5);
+    margin-bottom: 15px;
+}
+
+.oe-mktng-navbar .navbar {
+    font-size: 1.4em;
+    margin-bottom: 0;
+}
+
+.oe-mktng-navbar .nav > li > a {
+    padding: 25px;
+    opacity: 0.9;
+}
+
+.oe-mktng-navbar .nav > li > a:hover {
+    background: none;
+    opacity: 1;
+    transition: opacity 500ms linear;
+}
+
+.oe-mktng-navbar .nav > li:first-child > a {
+    padding-left: 0px;
+}
+
+.oe-mktng-navbar .active {
+    font-weight: bold;
+}
+
+
+/*     SIDE BAR      */
+
+.oe-mktng-sidebar .nav .nav {
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+.oe-mktng-sidebar .nav > li.active > a {
+    font-weight: bold;
+}
+.oe-mktng-sidebar .nav > li > a {
+    padding-left: 0;
+}
+.oe-mktng-sidebar .nav > li > a:hover,
+.oe-mktng-sidebar .nav > li > a:focus
+{
+    background-color: transparent;
+}
+
+.oe-mktng-sidebar.affix {
+    position: fixed;
+    top: 30px;
+}
+
+
+/*     MAIN          */
+
+.oe-mktng-main {
+    margin-bottom: 60px;
+}
+
+.oe-mktng-main hr {
+    display: block;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    float: left;
+    width: 100%;
+    border: none;
+    height: 1px;
+    box-sizing: border-box;
+    border-left: 15px solid white;
+    border-right: 15px solid white;
+    background: rgba(162, 70, 137, 0.3);
+}
+
+/*     CARDS        */
+
+.oe-mktng-card p {
+    font-size: 16px;
+    min-height: 45px;
+}
+
+.oe-mktng-card h4 {
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 4px;
+    font-size: 20px;
+}
+
+.oe-mktng-card h3.text-muted {
+    font-weight: 300;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
