@@ -1,13 +1,21 @@
 $(function(){
     "use strict";
+    
+    window.addEventListener("message", receiveMessage, false);
+
+    function receiveMessage(message){
+        console.log(message);
+    }
 
     function showOverlay(show){
         if (show) {
+            $('.oe-mktng-demo-trigger').show();
             $('.oe-mktng-demo-overlay').animate({left:0},1200,'swing');
             $('.oe-mktng-demo-toolbar').animate({opacity:0},500,'swing',function(){
                 $('.oe-mktng-demo-toolbar').hide();
             });
         } else {
+            $('.oe-mktng-demo-trigger').hide();
             $('.oe-mktng-demo-overlay').animate({left:-1400},1500,'swing');
             $('.oe-mktng-demo-toolbar').show().animate({opacity:1},500,'swing');
         }
@@ -48,13 +56,13 @@ $(function(){
 
     function cssGrad(c1,c2,dir) {
         var grad = "linear-gradient("+(dir || "to bottom")+","+c1+","+c2+")"
-        console.log(grad);
         return grad;
     }
 
 
     function Pos3D(target, opts){
         opts = opts || {};
+        var self = this;
 
         this.target = target;
         this.width  = opts.width  || $(target).innerWidth();
@@ -63,7 +71,7 @@ $(function(){
         this.floorwidth  = opts.floorwidth  || 512;
         this.floorheight = opts.floorheight || 512;
         this.angle = opts.angle || 45;
-        this.url = opts.url || 'http://localhost:8069/pos/web/';
+        this.url = opts.url || 'http://localhost:8069/pos/demo/#record';
         this.state = 'start';
 
         DivSugar.NUM_OF_DIGITS = 8;
@@ -107,8 +115,7 @@ $(function(){
         // -- Resize The Viewport
 
         function resize() {
-            console.log('resize');
-            pos.scn.adjustLayout($(pos.target).innerWidth(),$(pos.target).innerHeight(),'contain')
+            self.scn.adjustLayout($(self.target).innerWidth(),$(self.target).innerHeight(),'cover')
         }
         
         window.addEventListener('resize', resize, true);
@@ -116,7 +123,7 @@ $(function(){
         // -- remove overlay when clicked
 
         var self = this;
-        $('.oe-mktng-demo-overlay').click(function(){
+        $('.oe-mktng-demo-trigger').click(function(){
             self.transition('zoom');
         });
         
@@ -257,9 +264,9 @@ $(function(){
                 this.models.cashbox.playAnimation([
                     ['to', { position:[410,-200,325],  rotate:[0,0,45]}, 1000, DivSugar.Ease.quadInOut],
                     ['wait',200],
-                    ['call', function(){
+                    /*['call', function(){
                         self.models.cash.playAnimation([['to', {position:[0,55,0]}, 350, DivSugar.Ease.quadInOut]]);
-                    }],
+                    }], */
                 ]);
             } else {
                 this.models.cashbox.playAnimation([
@@ -470,4 +477,19 @@ $(function(){
         height: 500,
         angle: 30,
     });
+
+    window.iframe = $('.oe-ipad-iframe')[0];
+    window.addEventListener("message",function(event) {
+        if (event.data === 'scale_read') {
+            window.pos.models.printer.rotate(0,0,5);
+        }
+        if (event.data === 'open_cashbox') {
+            window.pos.models.cash.playAnimation([
+                ['to', {position:[0,55,0]}, 250, DivSugar.Ease.quadInOut],
+                [ 'wait', 1500 ],
+                ['to', {position:[0,4,0]}, 250, DivSugar.Ease.quadInOut],
+            ]);
+        }
+    }, false);
+
 });

@@ -25,6 +25,14 @@
     left: 0px;
     cursor: pointer;
 }
+.oe-mktng-demo-trigger {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    right: 0;
+    z-index: 50;
+    cursor: pointer;
+}
 
 .oe-mktng-demo-toolbar {
     position: absolute;
@@ -49,6 +57,21 @@
 .oe-mktng-demo-toolbar .label-close:hover
 {
     color: white;
+}
+
+.oe-mktng-srcolldown {
+    opacity: 0.5;
+    font-size: 96px;
+    cursor: pointer;
+    transition: opacity 250ms linear;
+}
+.oe-mktng-srcolldown:hover {
+    opacity: 1;
+}
+
+/*     HOMEPAGE */
+.oe-mktng-homepage .container {
+    max-width: 990px;
 }
 
 /*     FULLSCREEN */
@@ -112,8 +135,19 @@
 
 /*     NAVBAR      */
 .oe-mktng-navbar {
+    background: white;
+    background: linear-gradient(white,white,rgba(255,255,255,0.9));
     border-bottom: solid 1px rgba(162, 70, 137, 0.5);
-    margin-bottom: 15px;
+    position: absolute;
+    width: 100%;
+}
+.oe-mktng-navbar.stuck{
+    top: 0;
+    position: fixed;
+    z-index: 1;
+}
+.oe-mktng-navbar-placeholder {
+    margin-top: 88px;
 }
 
 .oe-mktng-navbar .navbar {
@@ -140,18 +174,48 @@
     font-weight: bold;
 }
 
+.oe-mktng-navbar .oe-mktng-call-action{
+    opacity: 0;
+    float: right;
+    margin-top: 16px;
+    pointer-events: none;
+    transition: opacity 250ms ease-in-out;
+    display: inline-block;
+    max-width: 400px;
+}
+.oe-mktng-navbar .oe-mktng-call-action .btn.btn-info {
+    color: white;
+    background: #A24689;
+    border-color: transparent;
+    margin-left: 16px;
+}
+.oe-mktng-navbar .oe-mktng-call-action .form-control {
+    color: blue;
+}
+
+
+.oe-mktng-navbar.stuck .oe-mktng-call-action{
+    opacity: 1;
+    pointer-events: all;
+}
+
 
 /*     SIDE BAR      */
 
+.oe-mktng-sidebar {
+    margin-top: 24px;
+}
 .oe-mktng-sidebar .nav .nav {
     padding-bottom: 10px;
     padding-left: 10px;
+    cursor: pointer;
 }
 .oe-mktng-sidebar .nav > li.active > a {
     font-weight: bold;
 }
 .oe-mktng-sidebar .nav > li > a {
     padding-left: 0;
+    cursor: pointer;
 }
 .oe-mktng-sidebar .nav > li > a:hover,
 .oe-mktng-sidebar .nav > li > a:focus
@@ -159,15 +223,17 @@
     background-color: transparent;
 }
 
-.oe-mktng-sidebar.affix {
+.oe-mktng-sidebar.stuck{
     position: fixed;
-    top: 30px;
+    top: 88px;
+    z-index: 1;
 }
 
 
 /*     MAIN          */
 
 .oe-mktng-main {
+    margin-top: 0px;
     margin-bottom: 60px;
 }
 
@@ -185,6 +251,32 @@
     border-right: 15px solid white;
     background: rgba(162, 70, 137, 0.3);
 }
+
+.oe-mktng-main .img-responsive {
+    margin: auto;
+}
+.oe-mktng-main .img-small {
+    display: block;
+    max-width: 200px;
+    max-height: 150px;
+    margin: auto;
+}
+.oe-mktng-main .img-small.img-rounded {
+    border-radius: 3px;
+}
+.oe-mktng-main .img-medsm {
+    display: block;
+    max-width: 300px;
+    max-height: 200px;
+    margin: auto;
+}
+.oe-mktng-main .img-med {
+    display: block;
+    max-width: 400px;
+    max-height: 300px;
+    margin: auto;
+}
+
 
 /*     CARDS        */
 

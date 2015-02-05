@@ -19,7 +19,7 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="js/vendor/divsugar.js"></script>
     </head>
-    <body data-spy="scroll" data-target='.oe-mktng-sidenav' data-offset='30'><div id="wrapwrap">
+    <body><div id="wrapwrap">
         <div class="oe-mktng-demo-fullscreen">
             <div class="oe-mktng-demo-fullscreen-overlay"></div>
             <div class="oe-mktng-demo-exit-fullscreen"></div>
@@ -56,20 +56,26 @@
         </header>
         
         <main>
-            <div class="oe_structure"><section class="odoo_primary oe-mktng-header">
-            <div class='oe-mktng-demo'>
+            <div class="oe_structure"><section class="odoo_primary oe-mktng-header fitscreen" 
+                data-fitscreen-abandon-size="1024"
+                data-fitscreen-min-height="450"
+                data-fitscreen-min-ratio="2.5"
+                data-fitscreen-max-ratio="4"
+                data-fitscreen-with=".oe-mktng-navbar,.navbar-default" />
+            <div class='oe-mktng-demo hidden-sm hidden-xs'>
                 <div class='oe-mktng-demo-toolbar'>
                     <span class='label-fullscreen'>Go Fullscreen</span> 
                     | 
                     <span class='label-close'>Back</span>
+                    <div class='oe-mktng-demo-trigger'></div>
                 </div>
             </div>
             <div class="container oe-mktng-demo-overlay">
 
                 <div class="row">
                     <div class="col-md-6 mt128">
-                        <h1>Odoo Point of Sale</h1>
-                        <h3 class="mt0">Run your physical store with our complete point of sale, easy to use and compatible with any device.</h3>
+                        <h1>Odoo Restaurant</h1>
+                        <h3 class="mt0">Run your bar or restaurant with our complete point of sale, easy to use and compatible with any device.</h3>
 
                         <div class="odoo_call_action mt16">
                             <div class="odoo_call_action_bg">
@@ -89,23 +95,13 @@
                             <p class="mt4 text-muted invisible" id="price">Free for 2 users, 20 € per user per month.</p></div>
 
                     </div>
-                    <div class="col-md-6 mt64">
-                        <!--
-                        <div class="odoo_mix_picture">
-                            <div class="imac-frame" style="">
-                                <img alt="" class="img-responsive" editablecontent="false" src="http://www.odoo.com/openerp_website/static/src/img/theme/imac.png">
-                                <div class="screen screen-mutli-img">
-                                    <img alt="" class="img-responsive oe_img" editablecontent="true" src="http://www.odoo.com/website/image?max_height=768&amp;field=datas&amp;model=ir.attachment&amp;id=536428&amp;max_width=1024">
-                                </div>
-                            </div>
-                        </div>-->
-                    </div>
                 </div>
 
             </div><!-- container -->
             </section></div>
+            <div class='oe-mktng-sticky-place'></div>
 
-            <div class='oe_structure oe-mktng-navbar'>
+            <div class='oe_structure oe-mktng-navbar hidden-sm hidden-xs sticky' data-sticky-top-el=".oe-mktng-sticky-place">
                 <div class='container'>
                     <nav class='navbar'>
                         <div class='container-fluid'>
@@ -113,220 +109,232 @@
                         <ul class='nav navbar-nav'>
                             <li><a href='pos.html'>Shops</a></li>
                             <li><a href='pos_restaurant.html' class='active'>Restaurants</a></li>
-                            <li><a href='features.html' >Features</a></li>
+                            <li><a href='features.html'>Features</a></li>
                             <li><a href='hardware.html'>Hardware</a></li>
                         </ul>
+                        <div class="oe-mktng-call-action">
+                            <form role="form" class="form-inline">
+                                <div class="pull-right">
+                                    <button class="btn btn-info" id="create_instance" type="submit">
+                                        <strong>Try now!</strong>
+                                    </button>
+                                </div>
+                                <div class="input-group">
+                                    <input name="odoo_db_name" type="text" placeholder="your-company-name" class="form-control odoo_db_name" data-placement="bottom" data-trigger="manual" data-app="point_of_sale" data-original-title="" title="">
+                                    <span class="input-group-addon">.odoo.com</span>
+                                </div>
+                            </form>
+                        </div>
                     </nav>
                 </div>
             </div>
 
-            <div class='oe_structure oe-mktng-main'>
+            <div class='oe-mktng-navbar-placeholder hidden-sm hidden-xs'></div>
+
+            <div class='oe_structure oe-mktng-main oe-mktng-homepage'>
                 <div class='container'>
                     <div class='row'>
-                        <section class='col-md-3 hidden-xs hidden-sm' role='complementary'>
-                            <nav class="oe-mktng-sidebar">
-                                <ul class="nav oe-mktng-sidenav">
+                        <section class='col-md-12' role='main' >
 
-                                    <li><a href="#payments">Payments</a></li>
-                                    <li><a href="#checkout">Checkout</a></li>
-                                    <li><a href="#store">Store Management</a></li>
-                                    <li><a href="#customer">Customer Management</a></li>
-                                    <li><a href="#restaurant">Restaurant Management</a></li>
-                                    <li><a href="#products">Products</a></li>
-                                    <li><a href="#analytics">Analytics & Reporting</a></li>
-                                    <li><a href="#offline">Web Based</a></li>
-                                    <li><a href="#support">Support</a></li>
-
-                                </ul>
-                            </nav>
-                        </section>
-                        <section class='col-md-9' role='main' >
-                            <h1 id='payments'>Payments</h1> 
-                            <div class='row oe-mktng-card'>
+                            <article class='row oe-mktng-card'>
+                                <h1 class='text-center mt64'>Everything Your Restaurant Needs,</h1>
+                                <h3 class='text-center text-muted mb32'>We got it.</h3>
                                 <div class='col-md-6 col-sm-6'>
-                                    <h4>Payment Methods</h4>
-                                    <p>Cash, Cheques and Electronic Card payment methods are available. New types of payment
-                                    methods can be added as well.
-                                    <h4>Electronic Cards</h4>
-                                    <p>Credit Card and Electronic payments are handled by external payment terminals.</p>
-                                    <h4>Split Tenders</h4>
-                                    <p>A single order can be paid with in separate payments, and with separate payment
-                                    methods.</p>
+                                    <img class='img img-responsive' src='/img/imac-resto2.png'>
                                 </div>
                                 <div class='col-md-6 col-sm-6'>
-                                    <h4>Offline Payments</h4>
-                                    <p>Orders made offline are automatically synchronized when you are reconnected</p>
-                                    <h4>Invoicing</h4>
-                                    <p>Generate and print invoices for your business customers.</p>
-                                    <h4>Accounting</h4>
-                                    <p>For easier bookkeeping all payments are directly integrated into Odoo Accounting.</p>
+                                    <p>
+                                    Odoo Restaurant is a complete solution for bar and restaurants based on Odoo Point of Sale.
+                                    Insanely fast, easy to use and higly customizable, Odoo Restaurant is suited for restaurants and bars of any size, from the ice-cream van to multinational chains.  
+                                    </p><p>
+                                    As a Web Application, Odoo Restaurant can run on a vast variety of devices. And if you ever
+                                    lose your internet connection, Odoo Restaurant will continue to work offline. 
+                                    </p><p>
+                                    Odoo Restaurant is fully integrated with the inventory app and accounting app. 
+                                    It means that any transaction that you make with your POS will automatically 
+                                    enter your inventory management and accounting. Our POS includes extra 
+                                    features such as customer service and creation of invoices.
+                                    </p><p>
+                                    You will be able to run real time statistics and consolidations across all your
+                                    shops without the hassle of integrating several applications.
+                                    </p>
                                 </div>
-                                <hr />
-                            </div>
+                                <hr class='mt64' />
+                            </article>
 
-                            <h1 id='checkout'>Checkout</h1> 
-                            <div class='row oe-mktng-card'>
+                            <article class='row oe-mktng-card'>
+                                <h1 class='text-center mt32'>A God-eye's view on your restaurant</h1> 
+                                <h3 class='text-center text-muted mb32'>With The Floors &amp; Tables Manager</h3>
                                 <div class='col-md-6 col-sm-6'>
-                                    <h4>Prices &amp; Discounts</h4>
-                                    <p>Set custom prices or offer percentage based discounts on one product or the complete order</p>
-                                    <h4>Parallel Orders</h4>
-                                    <p>Put orders aside and process multiple orders at the same time.</p>
-
-                                    <h4>Customized Receipts</h4>
-                                    <p>Advertise your promotions, opening hours and events on your printed receipts.</p>
-
-                                    <h4>Weighting at the Counter</h4>
-                                    <p>Weight products during checkout with the electronic scale integration</p>
-                                </div>
-                                <div class='col-md-6 col-sm-6'>
-                                    <h4>Instant Search</h4>
-                                    <p>Quickly find your customers and products with the built-in search engine.</p>
-
-                                    <h4>Multi-Step Checkout</h4>
-                                    <p>Sell at one point of sale and pay at another with multi-step checkout</p>
-
-                                    <h4>Sell on the move</h4>
-                                    <p>With iPads and Android tablets, sell anywhere in your store or restaurant</p>
-
-                                    <h4>Dynamic Barcodes</h4>
-                                    <p>Embed price, weight and discount information into barcodes</p>
-                                </div>
-                                <hr />
-                            </div>
-
-                            <h1 id='store'>Store Management</h1> 
-                            <div class='row oe-mktng-card'>
-                                <div class='col-md-6 col-sm-6'>
-                                    <h4>Order History</h4>
-                                    <p>View all past orders, search by customer, product, cashier or date</p>
-
-                                    <h4>Daily Sales</h4>
-                                    <p>Keep track of daily sales and totals for every payment type.</p>
-
-                                    <h4>Cashier Accounts</h4>
-                                    <p>Manage multiple cashier account and secure them with badges or pin codes.</p>
+                                    <p>
+                                    Odoo Restaurant lets you quickly overview your restaurant and jump from floor to
+                                    floor to your table's orders. The Layout can be changed on a whim, tables can
+                                    be added and removed as you wish.
+                                    </p><p>
+                                    The Floor plan will tell you exactly where are your customers, where are the 
+                                    free tables, who is still waiting for food, and how much room do you have left.
+                                    </p><p>
+                                    Odoo Restaurant supports multiple point of sales in the same restaurant.
+                                    The floor plan is entirely optional and can be configured on a point of sale 
+                                    basis.
+                                    </p>
                                 </div>
                                 <div class='col-md-6 col-sm-6'>
-                                    <h4>Cash Flows</h4>
-                                    <p>Monitor cash register adjustements, verify cash contents at the end of the day</p>
-                                    <h4>Stock &amp; Inventory</h4>
-                                    <p>Monitor your stock in real time, manage your inventories and shipments with
-                                       Odoo Stock integration</p>
-
-                                    <h4>Franchises</h4>
-                                    <p>Pre-configure your franchises stores, and centrally manage your franchises
-                                    stock and accounting.</p>
+                                    <img class='img img-responsive img-rounded' src='/img/floor-edit.png'>
                                 </div>
-                                <hr />
-                            </div>
+                                <hr class='mt64' />
+                            </article>
 
-                            <h1 id='customer'>Customer &amp; Loyalty</h1> 
-                            <div class='row oe-mktng-card'>
-                                <div class='col-md-6 col-sm-6'>
-                                    <h4>Register Customers</h4>
-                                    <p>Identify your customers, register their email and contact address.
-                                       Offer them discounts and keep track of their sales.</p>
-
-                                    <h4>Identify Customers</h4>
-                                    <p>Find your customers with the built-in search engine or identify 
-                                       them with a barcode printed on their loyalty card.</p>
-
+                            <article class='row oe-mktng-card'>
+                                <h1 class='text-center mt32'>An interface designed for productivity</h1> 
+                                <h3 class='text-center text-muted mb32'>Spend less time at the counter, be there for your customers.</h3>
+                                <div class='col-md-4 col-sm-4'>
+                                    <img class='img img-small img-rounded' src='/img/splitbill.png'>
                                 </div>
-                                <div class='col-md-6 col-sm-6'>
-                                    <h4>Business Customers</h4>
-                                    <p>Register your customer's VAT number and print them invoices.</p>
-
-                                    <h4>Loyalty Cards</h4>
-                                    <p>Reward your customers with loyalty points, and exchange them for
-                                       gifts and discounts. Points can be earned by product, by order or
-                                       by sale amount.</p>
-
+                                <div class='col-md-4 col-sm-4'>
+                                    <img class='img img-small img-rounded' src='/img/kitchenorder.png'>
                                 </div>
-                                <hr />
-                            </div>
-
-                            <h1 id='restaurant'>Restaurant Management</h1> 
-                            <div class='row oe-mktng-card'>
-                                <div class='col-md-6 col-sm-6'>
-                                    <h4>Floor Plans</h4>
-                                    <p>Assign orders to tables and overview your restaurant's floors. Make changes
-                                    on the go with the graphical editor.</p>
-
-                                    <h4>Kitchen Printing</h4>
-                                    <p>Send the order instructions to the bar and kitchen printers. Instructions
-                                    can be sent to different printers based on the product category</p>`
-
+                                <div class='col-md-4 col-sm-4'>
+                                    <img class='img img-small img-rounded' src='/img/search.png'>
                                 </div>
-                                <div class='col-md-6 col-sm-6'>
-                                    <h4>Kitchen Order Notes</h4>
-                                    <p>Take note of your customer's special requests and send them to
-                                    the kitchen and bar printers.</p>
-
-                                    <h4>Split Bills</h4>
-                                    <p>Let customers pay separately or at different times by splitting orders.</p>
+                                <div class='col-md-4 col-sm-4'>
+                                    <h4>Split The Bills</h4>
+                                    <p>
+                                    Orders can be paid in separate payments, or split into multiple new orders.
+                                    </p><p>
+                                    Split orders can be paid immediately, or kept for later. 
+                                    </p>
                                 </div>
-                                <hr />
-                            </div>
+                                <div class='col-md-4 col-sm-4'>
+                                    <h4>Kitchen &amp; Bar Printing</h4>
+                                    <p>
+                                    New orders and updates can be wirelessly sent
+                                    to the kitchen or bar as soon as you encode them.
+                                    </p><p>
+                                    The order instructions are automatically sent to
+                                    the correct printer based on the menu item category.
+                                    </p>
+                                </div>
+                                <div class='col-md-4 col-sm-4'>
+                                    <h4>Blazing fast search</h4>
+                                    <p>
+                                    Scan products, browse through hierarchical categories or quickly get 
+                                    information about products with fast filtering across all your items.
+                                    </p>
+                                </div>
+                                <hr class='mt64' />
+                            </article>
 
-                            <h1 id='products'>Products</h1> 
-                            <div class='row oe-mktng-card'>
+                            <article class='row oe-mktng-card'>
+                                <h1 class='text-center mt32'>Integrated Inventory Management</h1> 
+                                <h3 class='text-center text-muted mb32'>Odoo Restaurant will facilitate your inventory management</h3>
                                 <div class='col-md-6 col-sm-6'>
-                                    <h4>Product Categories</h4>
-                                    <p>Organize your products with hierarchical product categories.</p>
-
-                                    <h4>Product Search</h4>
-                                    <p>Quickly find products by their name, barcode or description with the built-in search-engine.</p>
-                                    <h4>Units of Measure</h4>
-                                    <p>Sell your products with different units and update your stock accordingly.</p>
-
+                                    <img class='img img-med' src='https://www.odoo.com/website/image?max_height=768&field=datas&model=ir.attachment&id=499796&max_width=1024'>
                                 </div>
                                 <div class='col-md-6 col-sm-6'>
-                                    <h4>Multiple Barcodes</h4>
-                                    <p>Configure multiple barcodes for the same product with barcode nomenclatures.</p>
-
-                                    <h4>Product Variants</h4>
-                                    <p>Sell different variations of the same product with product variants.</p>
-
-                                    <h4>Large Product Count</h4>
-                                    <p>Odoo's Point of sale performance scales to about 100,000 products.</p>
+                                    <p>
+                                    Consolidate all your sales channels in real time: stores, ecommerce, sales teams.
+                                    Get real time control of the inventory and accurate forecasts to manage procurements.
+                                    </p><p>
+                                    Odoo POS is fully integrated with other Odoo apps. Your inventory app would 
+                                    automatically input any transaction from the pos in the stock. You will be able 
+                                    to see in real time the availability of products without losing time. Furthermore,
+                                    the POS is compatible with Odoo Ecommerce solution. You won't need to setup separate 
+                                    stocks for the two apps and improve your process. 
+                                    </p>
                                 </div>
-                                <hr />
-                            </div>
+                                <hr class='mt64' />
+                            </article>
 
-                            <h1 id='offline'>Analytics &amp; Reporting </h1> 
-                            <div class='row oe-mktng-card'>
+                            <article class='row oe-mktng-card'>
+                                <h1 class='text-center mt32'>Deliver in-store customer services</h1> 
+                                <h3 class='text-center text-muted mb32'>Repairs,waranties,deliveries,etc.</h3>
                                 <div class='col-md-6 col-sm-6'>
-                                    <h4>Foobar</h4>
-                                    <p>foobar</p>
-
-                                </div>
-                                <div class='col-md-6 col-sm-6'>
-                                </div>
-                                <hr />
-                            </div>
-                            <h1 id='offline'>Web Based</h1> 
-                            <div class='row oe-mktng-card'>
-                                <div class='col-md-6 col-sm-6'>
-                                    <h4>Browser Support</h4>
-                                    <p>Run your shop from any device and OS running Chrome, Firefox or Safari.</p>
-
-                                    <h4>iPad First</h4>
-                                    <p>Odoo POS is best used on a recent iPad or Android Tablet of comparable size and performance.</p>
-
-                                    <h4>PC Compatible</h4>
-                                    <p>Odoo POS can also be used on regular computers and industrial touch-screen terminals.</p>
-
+                                    <img class='img img-med' src='https://www.odoo.com/website/image?max_height=768&field=datas&model=ir.attachment&id=499797&max_width=1024'>
                                 </div>
                                 <div class='col-md-6 col-sm-6'>
-                                    <h4>Works Offline</h4>
-                                    <p>Odoo's POS will keep working while offline. The web browser can be closed
-                                    offline without loss of data.</p>
-
-                                    <h4>HTML5 Mods</h4>
-                                    <p>Odoo's POS is Open-Source and can be customized with HTML5/JS extension modules.</p>
+                                    <p>
+                                    Odoo Restaurant is more than an ordinary POS. Our app provides extra features
+                                    to deliver a customer services.
+                                    </p><p>
+                                    Give your shopper a positive experience by improving your services. Handle refunds,
+                                    follow customer claims, plan order deliveries, etc... in one 
+                                    interface. Bring your sales at the next level, show that you follow your customers
+                                    need and keep track of their needs. Odoo POS can produce customer invoices in just
+                                    a few clicks and send information to odoo accounting app. You don't need to record
+                                    manually each transaction and send them to your accountant. The software will 
+                                    automatically send them for any transaction. Your accounting will be easier and 
+                                    more accurate. Our Point of Sales helps you to control sales and cash in real time
+                                    but also to keep accuracy for your store..
+                                    </p>
                                 </div>
-                                <hr />
-                            </div>
+                                <hr class='mt64' />
+                            </article>
+
+                            <article class='row oe-mktng-card'>
+                                <h1 class='text-center mt32'>Invoice & Accounting Integration</h1> 
+                                <h3 class='text-center text-muted mb32'>Odoo is the Restaurant solution your accountant will love</h3>
+                                <div class='col-md-6 col-sm-6'>
+                                    <img class='img img-med' src='https://www.odoo.com/website/image?max_height=768&field=datas&model=ir.attachment&id=499802&max_width=1024'>
+                                </div>
+                                <div class='col-md-6 col-sm-6'>
+                                    <p>
+                                    Odoo Restaurant can produce customer invoices in just a few clicks and send 
+                                    information to Odoo accounting app.
+                                    </p><p>
+                                    You don't need to record manually each transaction and send them to your
+                                    accountant. The software will automatically send them for any transaction.
+                                    </p><p>
+                                    Your accounting will be simplified and more accurate. Our Point of Sales
+                                    helps you to control sales and cash in real time but also to keep accuracy
+                                    for your store.
+                                    </p>
+                                </div>
+                                <hr class='mt64' />
+                            </article>
+
+                            <article class='row oe-mktng-card'>
+                                <h1 class='text-center mt32'>Unified Data Across All Restaurants to improve your sales</h1> 
+                                <h3 class='text-center text-muted mb32'>Sync products, prices and customers with no effort
+                                </h3>
+                                <div class='col-md-6 col-sm-6'>
+                                    <img class='img img-med' src='/img/posproducts.png'>
+                                </div>
+                                <div class='col-md-6 col-sm-6'>
+                                    <p>
+                                    Odoo Restaurant implement various functionnalities to improve your sales.
+                                    New products, pricing strategies and promotions can be automatically
+                                    applied to the selected stores. You can implement a global strategy 
+                                    across all your stores without difficulties. For example, being 
+                                    notified that some products soon out of date and setup a promotion
+                                    to sell these.
+                                    </p><p>
+                                    With Odoo as a backend, you have a system proven to be perfectly 
+                                    suitable for all sizes - from small stores to large multinationals.
+                                    </p>
+                                </div>
+                                <hr class='mt64' />
+                            </article>
+
+                            <article class='row oe-mktng-card'>
+                                <h1 class='text-center mt32'>Know Your Customers - In The Restaurant and Online</h1> 
+                                <div class='col-md-6 col-sm-6'>
+                                    <img class='img img-med' src='https://www.odoo.com/website/image?max_height=768&field=datas&model=ir.attachment&id=499809&max_width=1024'>
+                                </div>
+                                <div class='col-md-6 col-sm-6'>
+                                    <p>
+                                    Successful brands integrate all their customer relationships across
+                                    all their channels to develop accurate customer profiles and 
+                                    communicate with shoppers as they make buying decisions, in the restaurant
+                                    and online.
+                                    </p><p>
+                                    With Odoo, you get a 360 degree customer view, including cross-channel
+                                    sales, interaction history, profiles and more.
+                                    </p>
+                                </div>
+                                <hr class='mt64' />
+                            </article>
+
 
 
                         </section>
@@ -336,19 +344,10 @@
             </div>
         </main>
 
-
-
-
-
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/ipad.js"></script>
-        <script>
-            $(function(){
-                $('body').scrollspy({target: '.oe-mktng-sidebar', offset: 80});
-            });
-        </script>
     </div></body>
 </html>

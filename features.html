@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic|Lora:400,700,400italic,700italic|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/odoo-bs.css">
         <style>
             body {
@@ -19,7 +20,7 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="js/vendor/divsugar.js"></script>
     </head>
-    <body data-spy="scroll" data-target='.oe-mktng-sidenav' data-offset='30'><div id="wrapwrap">
+    <body data-spy="scroll" data-target=".oe-mktng-sidebar" data-offset="150"><div id="wrapwrap">
         <div class="oe-mktng-demo-fullscreen">
             <div class="oe-mktng-demo-fullscreen-overlay"></div>
             <div class="oe-mktng-demo-exit-fullscreen"></div>
@@ -56,56 +57,32 @@
         </header>
         
         <main>
-            <div class="oe_structure"><section class="odoo_primary oe-mktng-header">
-            <div class='oe-mktng-demo'>
-                <div class='oe-mktng-demo-toolbar'>
-                    <span class='label-fullscreen'>Go Fullscreen</span> 
-                    | 
-                    <span class='label-close'>Back</span>
-                </div>
-            </div>
+            <div class="oe_structure"><section class="odoo_primary oe-mktng-header fitscreen" 
+                data-fitscreen-abandon-size="1024"
+                data-fitscreen-min-height="450"
+                data-fitscreen-min-ratio="2.5"
+                data-fitscreen-max-ratio="4"
+                data-fitscreen-with=".oe-mktng-navbar,.navbar-default" />
+
             <div class="container oe-mktng-demo-overlay">
-
                 <div class="row">
-                    <div class="col-md-6 mt128">
-                        <h1>Odoo Point of Sale</h1>
-                        <h3 class="mt0">Run your physical store with our complete point of sale, easy to use and compatible with any device.</h3>
-
-                        <div class="odoo_call_action mt16">
-                            <div class="odoo_call_action_bg">
-                                <form role="form" class="form-inline">
-                                    <div class="pull-right">
-                                        <button class="btn btn-info" id="create_instance" type="submit">
-                                            <strong>Try now!</strong>
-                                        </button>
-                                    </div>
-                                    <div class="input-group">
-                                        <input name="odoo_db_name" type="text" placeholder="your-company-name" class="form-control odoo_db_name" data-placement="bottom" data-trigger="manual" data-app="point_of_sale" data-original-title="" title="">
-                                        <span class="input-group-addon">.odoo.com</span>
-                                    </div>
-                                </form>
-                            </div>
-                            <p class="mt4 text-muted" id="cta_footer">No credit card required. Instant Access. Open Source.</p>
-                            <p class="mt4 text-muted invisible" id="price">Free for 2 users, 20 € per user per month.</p></div>
-
-                    </div>
-                    <div class="col-md-6 mt64">
-                        <!--
-                        <div class="odoo_mix_picture">
-                            <div class="imac-frame" style="">
-                                <img alt="" class="img-responsive" editablecontent="false" src="http://www.odoo.com/openerp_website/static/src/img/theme/imac.png">
-                                <div class="screen screen-mutli-img">
-                                    <img alt="" class="img-responsive oe_img" editablecontent="true" src="http://www.odoo.com/website/image?max_height=768&amp;field=datas&amp;model=ir.attachment&amp;id=536428&amp;max_width=1024">
-                                </div>
-                            </div>
-                        </div>-->
+                    <div class="col-md-12 mt128 text-center">
+                        <h1 class='mb16'>No Other Point of Sale Suits a Wider Range of Businesses.</h1>
+                        <h3 class="mt16">See by yourself with this comprehensive overiew.</h3>
+                        <div class='oe-mktng-srcolldown mt32 clicknav' 
+                            data-clicknav='.oe-mktng-sticky-place'
+                            data-clicknav-offset='0'>
+                            <i class='fa fa-angle-double-down'></i>
+                        </div>
                     </div>
                 </div>
 
             </div><!-- container -->
-            </section></div>
 
-            <div class='oe_structure oe-mktng-navbar'>
+            </section></div>
+            <div class='oe-mktng-sticky-place'></div>
+
+            <div class='oe_structure oe-mktng-navbar hidden-sm hidden-xs sticky' data-sticky-top-el=".oe-mktng-sticky-place">
                 <div class='container'>
                     <nav class='navbar'>
                         <div class='container-fluid'>
@@ -116,15 +93,26 @@
                             <li><a href='features.html' class='active'>Features</a></li>
                             <li><a href='hardware.html'>Hardware</a></li>
                         </ul>
+                        <div class="oe-mktng-call-action">
+                            <form role="form" class="form-inline">
+                                <div class="pull-right">
+                                    <a href='#todo' class="btn btn-info">
+                                        <strong>Questions ? Ask an Expert ! </strong>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
                     </nav>
                 </div>
             </div>
+
+            <div class='oe-mktng-navbar-placeholder hidden-sm hidden-xs'></div>
 
             <div class='oe_structure oe-mktng-main'>
                 <div class='container'>
                     <div class='row'>
                         <section class='col-md-3 hidden-xs hidden-sm' role='complementary'>
-                            <nav class="oe-mktng-sidebar" data-spy="affix" data-offset-top="600">
+                            <nav class="oe-mktng-sidebar hidden-sm hidden-xs sticky" data-sticky-top-el=".oe-mktng-sticky-place">
                                 <ul class="nav oe-mktng-sidenav">
 
                                     <li><a href="#payments">Payments</a></li>
@@ -133,9 +121,9 @@
                                     <li><a href="#customer">Customer Management</a></li>
                                     <li><a href="#restaurant">Restaurant Management</a></li>
                                     <li><a href="#products">Products</a></li>
-                                    <li><a href="#analytics">Analytics & Reporting</a></li>
-                                    <li><a href="#offline">Web Based</a></li>
-                                    <li><a href="#support">Support</a></li>
+                                    <!-- <li><a href="#analytics">Analytics & Reporting</a></li> -->
+                                    <li><a href="#offline">Web Application</a></li>
+                                    <!-- <li><a href="#support">Support</a></li> -->
 
                                 </ul>
                             </nav>
@@ -150,8 +138,9 @@
                                     <h4>Electronic Cards</h4>
                                     <p>Credit Card and Electronic payments are handled by external payment terminals.</p>
                                     <h4>Split Tenders</h4>
-                                    <p>A single order can be paid with in separate payments, and with separate payment
-                                    methods.</p>
+                                    <p>A single order can be paid with in separate payments, and with separate payment methods.</p>
+                                    <h4>Currency Rounding</h4>
+                                    <p>Prices and payments can be rounded to the smallest denomination of the currency.</p>
                                 </div>
                                 <div class='col-md-6 col-sm-6'>
                                     <h4>Offline Payments</h4>
@@ -160,6 +149,8 @@
                                     <p>Generate and print invoices for your business customers.</p>
                                     <h4>Accounting</h4>
                                     <p>For easier bookkeeping all payments are directly integrated into Odoo Accounting.</p>
+                                    <h4>Customer Tips</h4>
+                                    <p>Accept customer extra tips or convert their change to a tip.</p>
                                 </div>
                                 <hr />
                             </div>
@@ -212,9 +203,8 @@
                                     <h4>Stock &amp; Inventory</h4>
                                     <p>Monitor your stock in real time, manage your inventories and shipments with
                                        Odoo Stock integration</p>
-
                                     <h4>Franchises</h4>
-                                    <p>Pre-configure your franchises stores, and centrally manage your franchises
+                                    <p>Pre-configure your franchises stores, overview their sales and centrally manage their
                                     stock and accounting.</p>
                                 </div>
                                 <hr />
@@ -252,12 +242,17 @@
                                     <p>Assign orders to tables and overview your restaurant's floors. Make changes
                                     on the go with the graphical editor.</p>
 
+                                    <p>Keep track of your guests and oveview your restaurant's capacity and available
+                                    tables.</p>
+
                                     <h4>Kitchen Printing</h4>
                                     <p>Send the order instructions to the bar and kitchen printers. Instructions
-                                    can be sent to different printers based on the product category</p>`
+                                    can be sent to different printers automatically based on the product category.
 
                                 </div>
                                 <div class='col-md-6 col-sm-6'>
+                                    <h4>Delayed Orders</h4>
+                                    <p>Take orders for different courses at once, and send them for printing at separate times.</p>
                                     <h4>Kitchen Order Notes</h4>
                                     <p>Take note of your customer's special requests and send them to
                                     the kitchen and bar printers.</p>
@@ -272,7 +267,8 @@
                             <div class='row oe-mktng-card'>
                                 <div class='col-md-6 col-sm-6'>
                                     <h4>Product Categories</h4>
-                                    <p>Organize your products with hierarchical product categories.</p>
+                                    <p>Organize your products with hierarchical product categories. Order them
+                                    by popularity, display different categories in different point of sales.</p>
 
                                     <h4>Product Search</h4>
                                     <p>Quickly find products by their name, barcode or description with the built-in search-engine.</p>
@@ -293,20 +289,21 @@
                                 <hr />
                             </div>
 
-                            <h1 id='offline'>Web Based</h1> 
+                            <h1 id='offline'>Web Application</h1> 
                             <div class='row oe-mktng-card'>
                                 <div class='col-md-6 col-sm-6'>
                                     <h4>Browser Support</h4>
-                                    <p>Run your shop from any device and OS running Chrome, Firefox or Safari.</p>
+                                    <p>Odoo POS is a Web Application, it can be deployed on any device and OS running Chrome, Firefox or Safari.</p>
+                                    <p>Microsof Windows, Apple OSX, Linux, Android and iOS are supported</p>
 
                                     <h4>iPad First</h4>
                                     <p>Odoo POS is best used on a recent iPad or Android Tablet of comparable size and performance.</p>
 
+                                </div>
+                                <div class='col-md-6 col-sm-6'>
                                     <h4>PC Compatible</h4>
                                     <p>Odoo POS can also be used on regular computers and industrial touch-screen terminals.</p>
 
-                                </div>
-                                <div class='col-md-6 col-sm-6'>
                                     <h4>Works Offline</h4>
                                     <p>Odoo's POS will keep working while offline. The web browser can be closed
                                     offline without loss of data.</p>
@@ -317,7 +314,6 @@
                                 <hr />
                             </div>
 
-
                         </section>
                     </div>
                 </div>
@@ -325,19 +321,9 @@
             </div>
         </main>
 
-
-
-
-
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
-        <script src="js/ipad.js"></script>
-        <script>
-            $(function(){
-                $('body').scrollspy({target: '.oe-mktng-sidebar', offset: 80});
-            });
-        </script>
     </div></body>
 </html>
