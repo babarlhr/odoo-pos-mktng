@@ -572,7 +572,6 @@
 
     Matrix.prototype.setRotation = function(x, y, z) {
         var q = new DivSugar.Quaternion().fromEuler(x,y,z);
-        console.log(q);
         return this.setQuaternion(q);
     };
 
@@ -1508,7 +1507,6 @@
                   case 'rotation':
                     animTask._fromRotation = this._lastRotation ? this._lastRotation : new DivSugar.Quaternion().fromMatrix(this._transform);
                     animTask._toRotation   = new DivSugar.Quaternion().fromEuler(value[0],value[1],value[2]);
-                    console.log('rotation',animTask._fromRotation.toEuler(), animTask._toRotation.toEuler(), animTask._totalTime);
                     break;
                   case 'transform':
                     if (animTask._fromTransform == null) {

@@ -23,7 +23,6 @@
     overflow: hidden;
     top: 0px;
     left: 0px;
-    cursor: pointer;
 }
 .oe-mktng-demo-trigger {
     position: absolute;
@@ -32,6 +31,18 @@
     right: 0;
     z-index: 50;
     cursor: pointer;
+}
+.oe-mktng-invite {
+    position: absolute;
+    left: 27%;
+    width: 270px;
+    text-align: center;
+    padding-top: 20px;
+    opacity: 0;
+    font-size: 16px;
+}
+.oe-mktng-invite .fa {
+    font-size: 30px;
 }
 
 .oe-mktng-demo-toolbar {
@@ -48,7 +59,7 @@
 .oe-mktng-demo-toolbar .label-fullscreen,
 .oe-mktng-demo-toolbar .label-close
 {
-    color: rgba(0,0,0,0.5);
+    color: rgba(255,255,255,0.5);
     cursor: pointer;
     padding: 16px;
     transition: all 150ms linear;
@@ -131,6 +142,11 @@
     opacity: 1;
     z-index: 10;
     pointer-events: none;
+}
+
+/*     DEVICES */
+#demo-scale, #demo-printer, #demo-cash {
+    cursor: pointer;
 }
 
 /*     NAVBAR      */

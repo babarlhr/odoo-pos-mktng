@@ -1,27 +1,25 @@
 $(function(){
     "use strict";
     
-    window.addEventListener("message", receiveMessage, false);
-
-    function receiveMessage(message){
-        console.log(message);
-    }
 
     function showOverlay(show){
         if (show) {
+            setTimeout(function(){
+                $('.oe-mktng-invite').animate({opacity:0.7},500,'swing');
+            },500);
             $('.oe-mktng-demo-trigger').show();
             $('.oe-mktng-demo-overlay').animate({left:0},1200,'swing');
             $('.oe-mktng-demo-toolbar').animate({opacity:0},500,'swing',function(){
                 $('.oe-mktng-demo-toolbar').hide();
             });
         } else {
+            $('.oe-mktng-invite').css({opacity:0});
             $('.oe-mktng-demo-trigger').hide();
             $('.oe-mktng-demo-overlay').animate({left:-1400},1500,'swing');
             $('.oe-mktng-demo-toolbar').show().animate({opacity:1},500,'swing');
         }
     }
     window.showOverlay = showOverlay;
-
 
     function rgbToHex(r, g, b) {
             return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
@@ -71,8 +69,9 @@ $(function(){
         this.floorwidth  = opts.floorwidth  || 512;
         this.floorheight = opts.floorheight || 512;
         this.angle = opts.angle || 45;
-        this.url = opts.url || 'http://localhost:8069/pos/demo/#record';
+        this.url = opts.url || 'http://localhost:8069/pos/demo/';
         this.state = 'start';
+        this.weight = 0;
 
         DivSugar.NUM_OF_DIGITS = 8;
 
@@ -105,12 +104,19 @@ $(function(){
         // -- Animate the floor appearance
 
         $(this.target).css({opacity:0}).animate({opacity:1},1000);
-
+        
         // -- Animate the screen appearance
 
         setTimeout(function(){
             $('.oe-ipad-screen-overlay').animate({opacity:0},500);
         },500);
+
+        // -- Animate the click invite appearance
+
+        setTimeout(function(){
+            $('.oe-mktng-invite').animate({opacity:0.7},500,'swing');
+        },1000);
+
 
         // -- Resize The Viewport
 
@@ -153,7 +159,7 @@ $(function(){
             prescale: [3,3,3],
             scale: [2.7,2.7,2.7],
             faces: [
-                { size: [400, 400], opacity:0.5, pos:[-200, -200,           -1           ], rad:[0,0,0,0], rot:[0,  0,0], bg:'/img/shade.png' },
+                { size: [400, 400], opacity:0.5, pos:[-200, -200,           -1           ], rad:[0,0,0,0], rot:[0,  0,0], bg:'/img/shade.png' , nopointer: true},
                 { size: [200, 110], opacity:1, pos:[-100, -50,            0            ], rad:[5,5,0,0], rot:[0,  0,0], bg: cols[0]},
                 { size: [200, 4  ], opacity:1, pos:[-100,  59.7,          0            ], rad:[0,0,0,0], rot:[27, 0,0], bg: cssGrad(cols[0],cols[1])},
                 { size: [200, 4  ], opacity:1, pos:[-100,  62.9967241395, 1.67976484904], rad:[0,0,0,0], rot:[54, 0,0], bg: cssGrad(cols[1],cols[2]) },
@@ -213,7 +219,7 @@ $(function(){
             };
 
             if (opts.ground) {
-                model.faces.push({ size:[sx*3,sy*3], opacity:0.7, rot:0, pos:[-sx*1.5,-sy*1.5,-sz / 2 - 1], bg:'/img/shade.png'});
+                model.faces.push({ size:[sx*3,sy*3], opacity:0.7, rot:0, pos:[-sx*1.5,-sy*1.5,-sz / 2 - 1], bg:'/img/shade.png', nopointer:true});
             }
 
             cols[5] = opts.top    || cols[5];
@@ -231,115 +237,218 @@ $(function(){
             return model;
         },
 
+        buildOverlay: function(opts){
+            var sx = opts.sizex  || 100;
+            var sy = opts.sizey  || 100;
+            var imgs = opts.imgs || [];
+            var hy = sy/2;
+            var model = {
+                pos:  opts.pos || [0,0,0],
+                size: opts.size || [sx,sy],
+                rot:  opts.rot || [0,0,0],
+                prescale: opts.prescale || [1,1,1],
+                faces: [],
+            };
+
+            for (var i = 0; i < imgs.length; i++) {
+                var img = imgs[i];
+                model.faces.push({rot:[-90,0,0],size:[sx,sy], pos:[-sx/2,i,sy/2,], 
+                                 bg:img.src, name: img.name, zindex:i, id:img.id, 
+                                 nopointer: img.nopointer }); 
+            }
+            return model;
+        },
+
+        /* --- Cash Box --- */
+
         showCashbox: function(show) {
             var self = this;
             if (!this.models.cashbox) {
-                var model = this.buildBox({
-                    pos:     [400,-200, -300],
-                    boxsize: [70, 70, 25],
+                this.createModel('cashbox',this.buildOverlay({
+                    sizex: 100,
+                    sizey: 100,
+                    pos:     [275,-200, -200],
+                    boxsize: [35, 40, 20],
                     size:    [100, 100],
-                    rot:     [-20,0,0],
+                    rot:     [0,0,0],
                     prescale: [2,2,2],
-                    dcol: '#9d9ea5', 
-                    lcol: '#d6d8dd', 
-                    ground: true,
+                    scale: [1.2,1.2,1.2],
+                    imgs: [
+                        {src:'/img/demo/register_bg.png', name:'bg'},
+                        {src:'/img/demo/register_cash.png', name:'cash'},
+                        {src:'/img/demo/register_fg.png', name:'fg', id:'demo-cash'},
+                    ]
+                })).appendTo(this.models.floor);
+
+                $('#demo-cash').click(function(){
+                    self.activateCashbox();
                 });
-                this.createModel('cashbox', model).appendTo(this.models.floor);
-
-                var model = this.buildBox({
-                    pos:     [0,4,0],
-                    boxsize: [64, 70, 20],
-                    size:    [100, 100],
-                    rot:     [-0,0,0],
-                    prescale: [2,2,2],
-                    dcol: '#B4B6BD', 
-                    lcol: '#E8EAEF', 
-                    top: '#666666',
-                });
-
-                this.createModel('cash', model).appendTo(this.models.cashbox);
-
             }
             if (show) {
                 this.models.cashbox.playAnimation([
-                    ['to', { position:[410,-200,325],  rotate:[0,0,45]}, 1000, DivSugar.Ease.quadInOut],
-                    ['wait',200],
-                    /*['call', function(){
-                        self.models.cash.playAnimation([['to', {position:[0,55,0]}, 350, DivSugar.Ease.quadInOut]]);
-                    }], */
+                    ['to', { position:[275,-200, 350]}, 1000, DivSugar.Ease.quadInOut],
                 ]);
             } else {
-                this.models.cashbox.playAnimation([
-                    ['call', function(){
-                        self.models.cash.playAnimation([['to', {position:[0,4,0]}, 150, DivSugar.Ease.quadInOut]]);
-                    }],
-                    ['to', { position:[400,-200,-300], rotate:[0,0,-45]}, 1000, DivSugar.Ease.quadInOut],
-                ]);
+                this.models.cashbox.playAnimation([['to', { position:[275,-200,-200] }, 1000, DivSugar.Ease.quadInOut]]);
             }
         },
+
+        activateCashbox: function() {
+            var self = this;
+            if (this.cashbox_busy) { return; }
+            this.cashbox_busy = true;
+            this.models.cashbox.playAnimation([
+                ['to',{'scale':[1.2,1.2,1.2]}, 450, DivSugar.Ease.quadInOut],
+                ['wait',200],
+                ['call', function(){
+                    var cash = self.models.cashbox.cash;
+                    cash.playAnimation([
+                        ['to', {translate:[0,60,0]}, 750, DivSugar.Ease.quadInOut],
+                        ['wait',600],
+                        ['to', {translate:[0,-60,0]}, 750, DivSugar.Ease.quadInOut],
+                        ['call',function(){
+                            self.models.cashbox.playAnimation([
+                                ['to',{'scale':[0.8333,0.8333,0.8333]}, 800]
+                            ]);
+                            self.cashbox_busy = false;
+                        }],
+                    ]);
+                }],
+            ]);
+        },
+
+        /* --- PRINTER --- */
 
         showPrinter: function(show) {
             var self = this;
             if (!this.models.printer) {
-                this.createModel('printer',this.buildBox({
-                    pos:     [400,-200, -300],
+                this.createModel('printer',this.buildOverlay({
+                    sizex: 100,
+                    sizey: 100,
+                    pos:     [275,-200, -300],
                     boxsize: [35, 40, 20],
-                    size:    [100, 100],
-                    rot:     [-20,0,0],
-                    prescale: [2,2,2],
-                    scale: [1.2,1.2,1.2],
-                    dcol: '#393939', 
-                    lcol: '#444444', 
-                    ground: true,
-                })).appendTo(this.models.floor);
-
-                this.createModel('printerhead',this.buildBox({
-                    pos:     [5,30,40],
-                    boxsize: [25, 5, 5],
                     size:    [100, 100],
                     rot:     [0,0,0],
                     prescale: [2,2,2],
-                    dcol: '#393939', 
-                    lcol: '#444444', 
-                    top:  '#333333',
-                })).appendTo(this.models.printer);
+                    scale: [1.2,1.2,1.2],
+                    imgs: [
+                        {src:'/img/demo/printer_bg.png', name:'bg'},
+                        {src:'/img/demo/printer_receipt.png', name:'receipt'},
+                        {src:'/img/demo/printer_fg.png', name:'fg'},
+                    ]
+                })).appendTo(this.models.floor);
 
-                this.createModel('printercap',this.buildBox({
-                    pos:     [-2.5,2.5,25],
-                    boxsize: [40, 44, 16],
-                    size:    [100, 100],
-                    rot:     [-20,0,0],
-                    prescale: [2,2,2],
-                    dcol: '#414141', 
-                    lcol: '#484848', 
-                })).appendTo(this.models.printer);
-
-                this.models.receipt = new DivSugar.Node()
-                    .setSize(40,30)
-                    .setImage('#FFFFFF')
-                    .rotate(90,0,0)
-                    .setPosition(-15,30,5)
-                    .setOpacity(0)
-                    .appendTo(this.models.printer);
-
-                this.models.printer.scale(1.2,1.2,1.2);
             }
             if (show) {
                 this.models.printer.playAnimation([
-                    ['to', { position:[410,-200,75], rotate:[0,0,45]}, 1000, DivSugar.Ease.quadInOut],
-                    ['wait',200],
-                    ['call', function(){
-                        self.models.receipt.setOpacity(1);
-                        self.models.receipt.playAnimation([
-                            ['to', {position:[-15,30,45]}, 350, DivSugar.Ease.quadInOut]
-                        ]);
-                    }],
+                    ['to', { position:[275,-200, 100]}, 1000, DivSugar.Ease.quadInOut],
                 ]);
             } else {
-                this.models.printer.playAnimation([['to', { position:[400,-200,-300], rotate:[0,0,-45]}, 1000, DivSugar.Ease.quadInOut]]);
+                this.models.printer.playAnimation([['to', { position:[275,-200,-300] }, 1000, DivSugar.Ease.quadInOut]]);
+            }
+        },
+        activatePrinter: function() {
+            var self = this;
+            if (!this.models.printer) {
+                return;
+            }
+            this.models.printer.playAnimation([
+                ['to',{'scale':[1.2,1.2,1.2]}, 450, DivSugar.Ease.quadInOut],
+                ['wait',200],
+                ['call', function(){
+                    var receipt = self.models.printer.receipt;
+                    receipt.setOpacity(1);
+                    receipt.playAnimation([
+                        ['to', {translate:[0,-170,0]}, 750, DivSugar.Ease.quadInOut],
+                        ['wait',300],
+                        ['to', {opacity:0}, 350, DivSugar.Ease.quadInOut],
+                        ['to', {translate:[0,170,0]}, 10, DivSugar.Ease.quadInOut],
+                        ['call',function(){
+                            self.models.printer.playAnimation([
+                                ['to',{'scale':[0.8333,0.8333,0.8333]}, 800]
+                            ]);
+                        }],
+                    ]);
+                }],
+            ]);
+        },
+
+        /* --- Scale --- */
+
+        showScale: function(show) {
+            var self = this;
+            if (!this.models.scale) {
+                this.createModel('scale',this.buildOverlay({
+                    sizex: 100,
+                    sizey: 100,
+                    pos:     [550,-200, -200],
+                    boxsize: [35, 40, 20],
+                    size:    [100, 100],
+                    rot:     [0,0,0],
+                    prescale: [2,2,2],
+                    scale: [1.2,1.2,1.2],
+                    imgs: [
+                        {src:'/img/demo/scale_bg.png', name:'bg',  'id':'demo-scale'},
+                        {src:'/img/demo/scale_fg.png', name:'oranges', nopointer:true},
+                    ]
+                })).appendTo(this.models.floor);
+
+                $('#demo-scale').click(function(){
+                    self.toggleOranges();
+                });
+
+            }
+            if (show) {
+                this.models.scale.oranges.setOpacity(0);
+                this.models.scale.playAnimation([
+                    ['to', { position:[550,-200, 250]}, 1000, DivSugar.Ease.quadInOut],
+                ]);
+            } else {
+                this.models.scale.playAnimation([['to', { position:[550,-200,-200] }, 1000, DivSugar.Ease.quadInOut]]);
             }
         },
 
+        activateScale: function() {
+            var self = this;
+            this.models.scale.funny = this.models.scale.playAnimation([
+                ['to', {translate:[0,0,-10]}, 250, DivSugar.Ease.quadInOut],
+                ['to', {translate:[0,0,20]}, 500, DivSugar.Ease.quadInOut],
+                ['to', {translate:[0,0,-20]}, 700, DivSugar.Ease.quadInOut],
+                ['to', {translate:[0,0,10]}, 700, DivSugar.Ease.quadInOut],
+            ]);
+        },
+        toggleOranges: function() {
+            var self = this;
+            if (this.orange_busy) {
+                return;
+            } else if (this.orange_visibles) {
+                this.orange_busy = true;
+                this.orange_visibles = false;
+                this.models.scale.oranges.playAnimation([
+                    ['to',{opacity:0},150],
+                    ['call',function(){
+                        self.models.scale.playAnimation([
+                            ['to',{'translate':[0,0,10]}, 250]
+                        ]);
+                        window.pos.weight = 0;
+                        self.orange_busy = false;
+                    }],
+                ]);
+            } else {
+                this.orange_busy = true;
+                this.orange_visibles = true;
+                this.models.scale.oranges.playAnimation([
+                    ['to',{opacity:1},150],
+                    ['call',function(){
+                        self.models.scale.playAnimation([
+                            ['to',{'translate':[0,0,-10]}, 250]
+                        ]);
+                        window.pos.weight = 1 + Math.random();
+                        self.orange_busy = false;
+                    }],
+                ]);
+            }
+        },
         fullscreen: function(fullscreen){
             var self = this;
             if (fullscreen) {
@@ -388,6 +497,8 @@ $(function(){
                         ['call', function() { self.showCashbox(true); }],
                         ['wait', 200 ],
                         ['call', function() { self.showPrinter(true); }],
+                        ['wait', 200 ],
+                        ['call', function() { self.showScale(true); }],
                     ]);
             } else if(state === 'start') {
                 if (this.tasks.ipad) { this.tasks.ipad.active = false; }
@@ -395,6 +506,8 @@ $(function(){
                         ['call', function(){ self.showPrinter(false); }],
                         ['wait', 200 ],
                         ['call', function(){ self.showCashbox(false); }],
+                        ['wait', 200 ],
+                        ['call', function(){ self.showScale(false); }],
                         ['wait', 500 ],
                         ['call', function(){ showOverlay(true); }],
                         ['to',{ rotation: [0, 0, 30], scale: [1/1.28, 1/1.28, 1/1.28], position: [350,-100, 50] }, 900],
@@ -446,8 +559,21 @@ $(function(){
                     .rotate(fdesc.rot[0] || 0, fdesc.rot[1] || 0, fdesc.rot[2] || 0)
                     .setOpacity(fdesc.opacity || 1);
 
+                if (fdesc.nopointer) {
+                    face.div.style['pointer-events'] = 'none';
+                }
+                if (fdesc.id) {
+                    face.div.id = fdesc.id;
+                }
                 if (fdesc.html) {
                     face.div.innerHTML = fdesc.html;
+                }
+                if (fdesc.zindex) {
+                    face.div.style['z-index'] = fdesc.zindex;
+                }
+
+                if (fdesc.name) {
+                    node[fdesc.name] = face;
                 }
 
                 if (fdesc.rad) {
@@ -478,17 +604,38 @@ $(function(){
         angle: 30,
     });
 
-    window.iframe = $('.oe-ipad-iframe')[0];
+    var last_scale_event = 0;
+
+    function sendMessage(source,msg, arg) {
+        var iframe = $('.oe-ipad-iframe')[0];
+        if (iframe) {
+            iframe.postMessage(msg,'*');
+        } else {
+            console.log('no iframe to send message:',msg,arg);
+        }
+    }
+
     window.addEventListener("message",function(event) {
         if (event.data === 'scale_read') {
-            window.pos.models.printer.rotate(0,0,5);
+            var time = (new Date()).getTime();
+            if (time < last_scale_event + 200) { 
+                last_scale_event = time;
+                event.source.postMessage({name:'scale_write',value:window.pos.weight},event.origin);
+                return;
+            } else { 
+                last_scale_event = time;
+                window.pos.activateScale();
+                return;
+            }
         }
         if (event.data === 'open_cashbox') {
-            window.pos.models.cash.playAnimation([
-                ['to', {position:[0,55,0]}, 250, DivSugar.Ease.quadInOut],
-                [ 'wait', 1500 ],
-                ['to', {position:[0,4,0]}, 250, DivSugar.Ease.quadInOut],
-            ]);
+            window.pos.activateCashbox();
+        }
+        if (event.data === 'print') {
+            window.pos.activateCashbox();
+            setTimeout(function(){
+                window.pos.activatePrinter();
+            },2500);
         }
     }, false);
 

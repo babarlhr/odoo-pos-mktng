@@ -31,16 +31,11 @@ $(function(){
             }
             wh -= extra;
             if (ww / wh < minr) {
-                console.log('minr',minr,'|',ww,wh,ww/wh);
                 wh = Math.ceil(ww/minr);
-                console.log(wh);
             } else if (ww / wh > maxr) {
-                console.log('maxr',maxr,'|',ww,wh,ww/wh);
                 wh = Math.ceil(ww/maxr);
-                console.log(wh);
             }
             if (wh < minh) {
-                console.log('minh');
                 wh = minh;
             }
             tofit.css({'height': wh + 'px'});
